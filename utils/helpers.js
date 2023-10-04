@@ -30,3 +30,5 @@ function formatDate(date) {
   
     return `${shortMonthNames[monthIndex - 1]} ${day}, ${year} ${hours}:${minutes < 10 ? '0' : ''}${minutes} ${period}`;
 }
+
+module.exports = { formatTimestamp, formatDate }
