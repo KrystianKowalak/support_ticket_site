@@ -45,11 +45,11 @@ module.exports = {
                 where: {
                     ticketId: req.params.ticketId,
                 }
-              });
-              if (!logData) {
+            });
+            if (!logData) {
                 res.status(404).json({ message: "No log found with this ticket id!"});
                 return;
-              }
+            }
             res.status(200).json(logData);
         } catch (err) {
             res.status(500).json(err).redirect(`/ticket/${req.params.ticketId}`);
