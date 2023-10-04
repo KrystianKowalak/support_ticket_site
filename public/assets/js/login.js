@@ -4,17 +4,11 @@ const loginFormHandler = async (event) => {
   const email = document.querySelector("#email-login").value.trim();
   const password = document.querySelector("#password-login").value.trim();
 
-  if (!email && !password) {
+  if (!email || !password) {
 
     alert("Please provide your username and password.");
     return;
-  } else if (!email) {
-    alert("Please provide your username and password.");
-    return;
-  } else if (!password) {
-    alert("Please provide your username and password.");
-    return;
-  }
+  };
 
   if (email && password) {
     const response = await fetch("/api/user", {
