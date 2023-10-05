@@ -14,7 +14,7 @@ Log.init(
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      referemces: {
+      references: {
         model: "user",
         key: "id",
       }
@@ -73,6 +73,9 @@ Log.init(
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,
+      timestamps: false,
+      freezeTableName: true,
+      underscored: true,
     },
   },
   {
