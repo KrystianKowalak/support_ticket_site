@@ -11,6 +11,7 @@ function formatTimestamp(date) {
     return formattedTime;
 };
 
+
 function formatDate(date) {
     const shortMonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const monthIndex = date.getMonth() + 1; 
@@ -29,35 +30,38 @@ function formatDate(date) {
     return `${shortMonthNames[monthIndex - 1]} ${day}, ${year} ${hours}:${minutes < 10 ? "0" : ""}${minutes} ${period}`;
 };
 
+
 function findDiff(newValue, oldValue, activeUser) {
+  // Initialize an empty array to store the differences.
   const differences = [];
 
-  function compareObjects(newObj, oldObj, path = []) {
-    for (const key in newObj) {
-      const newPath = [...path, key];
-
-      if (typeof newObj[key] === "object" && newObj[key] !== null && !Array.isArray(newObj[key])) {
-        compareObjects(newObj[key], oldObj[key], newPath);
-      } else if (!(key in oldObj)) {
-        differences.push(`${newPath.join(".")} was added with value ${newObj[key]} by ${activeUser}.`);
-      } else if (newObj[key] !== oldObj[key]) {
-        differences.push(`${newPath.join(".")} was changed from ${oldObj[key]} to ${newObj[key]} by ${activeUser}.`);
-      }
+  // new or changed keys:
+  // loop through each key in the newValue object
+  for (let key in newValue) {
+    // check if the key is not in the oldValue object
+    if (!(key in oldValue)) {
+      // if the key is not in oldValue, it must be new/added, so push a new string to the differences array
+      differences.push(`${key} was added with value ${newValue[key]} by ${activeUser}.`);
+    } else if (newValue[key] !== oldValue[key]) {
+      // if the value of the key was changed, push a new string
+      differences.push(`${key} was changed from ${oldValue[key]} to ${newValue[key]} by ${activeUser}.`);
     }
-  };
+  }
 
-  compareObjects(newValue, oldValue);
-  
-  for (const key in oldValue) {
+  // removed keys:
+  // loop through each key in the oldValue object
+  for (let key in oldValue) {
+    // check if the key is not in the newValue object
     if (!(key in newValue)) {
-      differences.push(`${key} was removed (previously had value ${oldValue[key]}) by ${activeUser}.`);
+      // if the key is not in newValue, it was removed, so push a new string
+      differences.push(`${key} was removed by ${activeUser}.`);
     }
-  };
+  }
 
   return differences;
 };
 
-
+// ADD determineClass function
 
 
 // ADD NEW FUNCTIONS
