@@ -59,6 +59,3 @@ Log.belongsTo(Ticket, {
 });
 
 module.exports = { User, Log, Ticket };
-
-
-//Do I need an onDelete: CASCADE or similar command anywhere here?
