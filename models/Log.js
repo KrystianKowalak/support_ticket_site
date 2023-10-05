@@ -29,7 +29,7 @@ Log.init(
     ticketId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        referemces: {
+        references: {
             model: "user",
             key: "id",
         }
@@ -78,6 +78,9 @@ Log.init(
   {
     sequelize,
     modelName: 'log',
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
   }
 );
 
