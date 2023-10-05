@@ -3,11 +3,10 @@ function formatTimestamp(date) {
       throw new Error("Invalid date input. Please provide a Date object.");
     };
     const formattedTime = date.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
     });
-  
     return formattedTime;
 };
 
