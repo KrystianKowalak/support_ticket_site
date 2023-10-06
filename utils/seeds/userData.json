@@ -1,13 +1,13 @@
 [
     {
-        "email": "kkowalak9@email.com",
+        "email": "kkowalak9@gmail.com",
         "password": "password1997",
         "firstName": "Krystian",
         "lastName": "Kowalak",
         "role": "tech"
     },
     {
-        "email": "test@email.com",
+        "email": "test@gmail.com",
         "password": "passwordtest",
         "firstName": "Test",
         "lastName": "Client",

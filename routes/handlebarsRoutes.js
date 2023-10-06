@@ -1,10 +1,11 @@
 const router = require("express").Router();
+const withAuth = require("../utils/auth");
 
 const {
   showLogin,
   showDashboard,
   showTicket
-} = require("../../controllers/handlebarControllers")
+} = require("../controllers/handlebarControllers")
 
 router.route("/login")
   .get(showLogin);

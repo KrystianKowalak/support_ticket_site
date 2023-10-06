@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const session = require("express-session");
@@ -8,6 +8,7 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const routes = require("./routes");
 const sequelize = require("./utils/connection");
 const helpers = require("./utils/helpers");
+const auth = require("./utils/auth");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
