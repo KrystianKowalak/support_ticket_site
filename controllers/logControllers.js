@@ -33,6 +33,7 @@ module.exports = {
                 return;
             }
             log.message = req.body.message;
+            log.type = "Modified";
             await log.save();
             res.status(200).json(log).redirect(`/ticket/${req.params.ticketId}`);
         } catch (err) {

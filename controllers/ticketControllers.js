@@ -40,8 +40,8 @@ module.exports = {
                 techId = req.body.techId;
                 status = "Claimed";
             }
-            await ticket.save();
-            ticket.logChange(req.session.id, ticket)
+            await newTicket.save();
+            newTicket.logChange(req.session.id, ticket)
             res.status(200).json(newTicket).redirect(`/ticket/${req.params.id}`);
         } catch (err) {
             res.status(500).json(err);
