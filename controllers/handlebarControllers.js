@@ -120,7 +120,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  showDashboard: async function (req, res)  {
+  showTicket: async function (req, res)  {
     try {
       if (req.session.role == "client") {
         if (req.session.id != req.params.id) {

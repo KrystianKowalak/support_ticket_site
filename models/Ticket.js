@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connection");
+const sequelize = require("../utils/connection");
 const Log = require("./Log"); 
-const { findDiff, formatDate } = require("..utils/helpers");
+const { findDiff, formatDate } = require("../utils/helpers");
 
 class Ticket extends Model {
   logChange(userId, oldData) {
