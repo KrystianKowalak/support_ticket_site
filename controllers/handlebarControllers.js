@@ -1,11 +1,5 @@
 const { Ticket, User, Log } = require("../models");
 
-const {
-    login,
-    editLog,
-    deleteLog
-} = require("../../controllers/logControllers")
-
 module.exports = {
   showLogin: async function (req, res)  {
     try {
@@ -117,64 +111,38 @@ module.exports = {
       console.log(err);
       res.status(500).json(err);
     }
+  },
+  showDashboard: async function (req, res)  {
+    try {
+      if (req.session.role == "client") {
+        if (req.session.id != req.params.id) {
+          res.status(401).redirect("/");
+        }
+      }
+      const ticket = await Ticket.findOne({
+        where: {
+          id: req.params.id,
+        },
+        include: [{
+          model: User, as: "client",
+          attributes: ["id", "firstName", "lastName", "role"]
+        },
+        {
+          model: User, as: "tech",
+          attributes: ["id", "firstName", "lastName", "role"]
+        },
+        {
+          model: Log
+        }]
+      })
+      if (ticket.isArchived) {
+        res.status(401).redirect("/");
+      }
+      const plainTicket = ticket.map((ticketInfo) => ticketInfo.get({ plain: true }));
+      res.render("ticket", {layout: "main.handlebars", title: "Ticket Details", userType: req.session.role, loggedIn: req.session.loggedIn, plainTicket});
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
     }
-    // showDashboard: async function (req, res) => {
-    //     try {
-    //       const status = req.params.status || '';
-    //       console.log(status);
-    //       if (status === "Open" || status === "Pending") {
-    //         const ticketData = await Ticket.findAll({
-    //           where: {
-    //             status: req.params.status,
-    //             isArchived: false,
-    //           },
-    //           include: [
-    //             {
-    //               model: User, 
-    //               attributes: ["id", "role"]
-    //             }
-    //           ]
-    //         })
-    //         console.log(ticketData);
-    //         if (ticketData.length === 0) {
-    //           res.status(404).json({ message: "Ticket does not exist" })
-    //         }
-    //         res.status(200).json(ticketData);
-    //       }
-    //       else if (status === "Resolved") {
-    //         const ticketData = await Ticket.findAll({
-    //           where: {
-    //             status: req.params.status,
-    //           },
-    //           include: [
-    //             {
-    //               model: User,
-    //               attributes: ["id", "role"]
-    //             }
-    //           ]
-    //         })
-    //         console.log(ticketData);
-    //         if (ticketData.length === 0) {
-    //           res.status(404).json({ message: "Ticket does not exist" })
-    //         }
-    //         res.status(200).json(ticketData);
-    //       }
-    //       else {
-    //         const ticketData = await Ticket.findAll({
-    //           include: [{
-    //             model: User,
-    //             attributes: ["id", "role"]
-    //           }]
-    //         });
-    //         console.log(ticketData);
-    //         if (ticketData.length === 0) {
-    //           res.status(404).json({ message: "Ticket does not exist" })
-    //         }
-    //         res.status(200).json(ticketData);
-    //       }
-      
-    //     } catch (err) {
-    //       res.status(500).json(err);
-    //     }
-    //   };
+  }
 };
