@@ -25,11 +25,13 @@ module.exports = {
               isArchived: false
             },
             include: [{
-              model: User, as: "client",
+              model: User,
+              as: "client",
               attributes: ["id", "firstName", "lastName", "role"]
             },
             {
-              model: User, as: "tech",
+              model: User,
+              as: "tech",
               attributes: ["id", "firstName", "lastName", "role"]
             }]
           })
@@ -46,11 +48,13 @@ module.exports = {
               isArchived: false
             },
             include: [{
-              model: User, as: "client",
+              model: User,
+              as: "client",
               attributes: ["id", "firstName", "lastName", "role"]
             },
             {
-              model: User, as: "tech",
+              model: User,
+              as: "tech",
               attributes: ["id", "firstName", "lastName", "role"]
             }]
           })
@@ -69,11 +73,13 @@ module.exports = {
               status: status
             },
             include: [{
-              model: User, as: "client",
+              model: User,
+              as: "client",
               attributes: ["id", "firstName", "lastName", "role"]
             },
             {
-              model: User, as: "tech",
+              model: User,
+              as: "tech",
               attributes: ["id", "firstName", "lastName", "role"]
             }]
           })
@@ -91,11 +97,13 @@ module.exports = {
               status: status
             },
             include: [{
-              model: User, as: "client",
+              model: User,
+              as: "client",
               attributes: ["id", "firstName", "lastName", "role"]
             },
             {
-              model: User, as: "tech",
+              model: User,
+              as: "tech",
               attributes: ["id", "firstName", "lastName", "role"]
             }]
           })
@@ -124,11 +132,13 @@ module.exports = {
           id: req.params.id,
         },
         include: [{
-          model: User, as: "client",
+          model: User,
+          as: "client",
           attributes: ["id", "firstName", "lastName", "role"]
         },
         {
-          model: User, as: "tech",
+          model: User,
+          as: "tech",
           attributes: ["id", "firstName", "lastName", "role"]
         },
         {
