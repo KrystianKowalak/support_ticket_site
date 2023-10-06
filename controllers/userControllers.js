@@ -21,7 +21,10 @@ module.exports = {
             return;
         }
 
+        const { id, role } = user;
         req.session.save(() => {
+            req.session.id = id;
+            req.session.role = role
             req.session.loggedIn = true;
             res.status(200).json({user: user, message: "You are now logged in!"}).redirect('/');
         });
