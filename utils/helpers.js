@@ -60,8 +60,21 @@ function findDiff(newValue, oldValue, activeUser) {
   return differences;
 };
 
-// ADD determineClass function
+
+function determineShowHide(value) {
+  return value === true ? "hidden" : "shown";
+};
 
 
-// ADD NEW FUNCTIONS
-module.exports = { formatTimestamp, formatDate, findDiff }
+function determineAlignment(log, currentUser) {
+  if (log.type === 'Created' || log.type === 'Modified') {
+    return 'center-align';
+  } else if (currentUser.id === log.userId) {
+    return 'right-align';
+  } else {
+    return 'left-align';
+  }
+};
+
+
+module.exports = { formatTimestamp, formatDate, findDiff, determineShowHide, determineAlignment }
