@@ -22,33 +22,53 @@ module.exports = {
   showDashboard: async function (req, res)  {
     try {
       const status = req.params.status || "";
-      if(req.session.role == "client") {
-        const ticketClientData = await Ticket.findAll({
-          where: {
-            clientId: req.session.id,
-            isArchived: false
-          },
-          include: [{
-            model: User
-          }]
-        })
-        if (ticketClientData.length == 0) {
-          res.status(404).json({message: "No tickets found for this client"})
-        }
-      }
-      if(req.session.role == "tech") {
-        const ticketTechData = await Ticket.findAll({
-          where: {
-            techId: req.session.id,
-            isArchived: false
+      switch (status) {
+        case "Open":
+            break;
+        case "Pending":
+            break;
+        case "Resolved":
+            break;
+        case "Claimed":
+            break;
+        case "":
+            break;
+        default:
+            console.log("Outside switch statment options!");
+            process.exit(0);
+    }
+        if(req.session.role == "client") {
+          const ticketClientData = await Ticket.findAll({
+            where: {
+              clientId: req.session.id,
+              isArchived: false
+            },
+            include: [{
+              model: User,
+              attributes: ["id", "firstName", "lastName", "role"]
+            }]
+          })
+          if (ticketClientData.length == 0) {
+            res.status(404).json({message: "No tickets found for this client"})
           }
-        })
-        if (ticketTechData.length == 0) {
-          res.status(404).json({message: "No tickets found for this tech"})
         }
-      }
+        if(req.session.role == "tech") {
+          const ticketTechData = await Ticket.findAll({
+            where: {
+              techId: req.session.id,
+              isArchived: false
+            },
+            include: [{
+              model: User,
+              attributes: ["id", "firstName", "lastName", "role"]
+            }]
+          })
+          if (ticketTechData.length == 0) {
+            res.status(404).json({message: "No tickets found for this tech"})
+          }
+        }
 
-      res.render("home", {layout: "main.handlebars", title: "Dashboard" userType: req.session.role});
+      res.render("home", {layout: "main.handlebars", title: "Dashboard", userType: req.session.role, loggedIn: req.session.loggedIn});
     } catch (err) {
       console.log(err);
       res.status(500).json(err);

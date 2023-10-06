@@ -2,7 +2,9 @@ const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 const Log = require("./Log"); 
 
-class Ticket extends Model {}
+class Ticket extends Model {
+
+}
 
 Ticket.init(
   {
@@ -59,6 +61,9 @@ Ticket.init(
   },
   {
     sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
     modelName: "ticket",
     hooks: {
       afterCreate: async (ticket, options) => {
