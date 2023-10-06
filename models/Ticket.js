@@ -80,6 +80,9 @@ Ticket.init(
   },
   {
     sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
     modelName: "ticket",
     hooks: {
       afterCreate: async (ticket, options) => {
