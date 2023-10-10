@@ -27,21 +27,18 @@ module.exports = {
             include: [{
               model: User,
               as: "client",
-              attributes: ["id", "firstName", "lastName", "role"]
+              attributes: ["firstName", "lastName", "role"]
             },
             {
               model: User,
               as: "tech",
-              attributes: ["id", "firstName", "lastName", "role"]
+              attributes: ["firstName", "lastName", "role"]
             }]
           })
-          if (ticketClientData.length == 0) {
-            res.status(404).json({message: "No tickets found for this client"})
-          } else {
             plainTicketData = ticketClientData.map((ticketClientDataInfo) => ticketClientDataInfo.get({ plain: true }));
-          }
         }
         if(req.session.role == "tech") {
+          console.info(req.session.id);
           const ticketTechData = await Ticket.findAll({
             where: {
               techId: req.session.id,
@@ -50,19 +47,15 @@ module.exports = {
             include: [{
               model: User,
               as: "client",
-              attributes: ["id", "firstName", "lastName", "role"]
+              attributes: ["firstName", "lastName", "role"]
             },
             {
               model: User,
               as: "tech",
-              attributes: ["id", "firstName", "lastName", "role"]
+              attributes: ["firstName", "lastName", "role"]
             }]
           })
-          if (ticketTechData.length == 0) {
-            res.status(404).json({message: "No tickets found for this tech"})
-          } else {
             plainTicketData = ticketTechData.map((ticketTechDataInfo) => ticketTechDataInfo.get({ plain: true }));
-          }
         }
       } else {
         if(req.session.role == "client") {
@@ -75,19 +68,15 @@ module.exports = {
             include: [{
               model: User,
               as: "client",
-              attributes: ["id", "firstName", "lastName", "role"]
+              attributes: ["firstName", "lastName", "role"]
             },
             {
               model: User,
               as: "tech",
-              attributes: ["id", "firstName", "lastName", "role"]
+              attributes: ["firstName", "lastName", "role"]
             }]
           })
-          if (ticketClientData.length == 0) {
-            res.status(404).json({message: "No tickets found for this client"})
-          } else {
             plainTicketData = ticketClientData.map((ticketClientDataInfo) => ticketClientDataInfo.get({ plain: true }));
-          }
         }
         if(req.session.role == "tech") {
           const ticketTechData = await Ticket.findAll({
@@ -99,22 +88,18 @@ module.exports = {
             include: [{
               model: User,
               as: "client",
-              attributes: ["id", "firstName", "lastName", "role"]
+              attributes: ["firstName", "lastName", "role"]
             },
             {
               model: User,
               as: "tech",
-              attributes: ["id", "firstName", "lastName", "role"]
+              attributes: ["firstName", "lastName", "role"]
             }]
           })
-          if (ticketTechData.length == 0) {
-            res.status(404).json({message: "No tickets found for this tech"})
-          } else {
             plainTicketData = ticketTechData.map((ticketTechDataInfo) => ticketTechDataInfo.get({ plain: true }));
-          }
         }
       }
-      res.render("home", {layout: "main.handlebars", title: "Dashboard", userType: req.session.role, loggedIn: req.session.loggedIn, plainTicketData});
+      return res.render("home", {layout: "main.handlebars", title: "Dashboard", userType: req.session.role, loggedIn: req.session.loggedIn, plainTicketData});
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
@@ -134,12 +119,12 @@ module.exports = {
         include: [{
           model: User,
           as: "client",
-          attributes: ["id", "firstName", "lastName", "role"]
+          attributes: ["firstName", "lastName", "role"]
         },
         {
           model: User,
           as: "tech",
-          attributes: ["id", "firstName", "lastName", "role"]
+          attributes: ["firstName", "lastName", "role"]
         },
         {
           model: Log

@@ -8,14 +8,12 @@ module.exports = {
                     email: req.body.email,
                 },
         });
-        console.log(user);
         if (!user) {
             res.status(400).json({message: "Incorrect email or password. Please try again!"});
             return;
         }
 
         const validPassword = await user.validatePassword(req.body.password);
-        console.log(validPassword);
         if (!validPassword) {
             res.status(400).json({message: "Incorrect email or password. Please try again!"});
             return;
@@ -26,8 +24,8 @@ module.exports = {
             req.session.id = id;
             req.session.role = role
             req.session.loggedIn = true;
+            res.status(200).json({user: user, message: "You are now logged in!"});
         });
-        res.status(200).json({user: user, message: "You are now logged in!"}).redirect('/');
         } catch (err) {
             console.log(err);
             res.status(500).json(err);

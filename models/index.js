@@ -5,14 +5,22 @@ const Ticket = require("./Ticket");
 User.hasMany(Ticket, {
     foreignKey: "clientId",
     as: "client",
+    allowNull: false,
+    onDelete: "CASCADE"
+});
+User.hasMany(Ticket, {
     foreignKey: "techId",
     as: "tech",
     allowNull: false,
     onDelete: "CASCADE"
 });
 Ticket.belongsTo(User, {
-    foreignKey: "clientID",
+    foreignKey: "clientId",
     as: "client",
+    allowNull: false,
+    onDelete: "SET NULL"
+});
+Ticket.belongsTo(User, {
     foreignKey: "techId",
     as: "tech",
     allowNull: false,
