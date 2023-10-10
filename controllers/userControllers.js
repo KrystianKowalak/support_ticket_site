@@ -26,8 +26,8 @@ module.exports = {
             req.session.id = id;
             req.session.role = role
             req.session.loggedIn = true;
-            res.status(200).json({user: user, message: "You are now logged in!"}).redirect('/');
         });
+        res.status(200).json({user: user, message: "You are now logged in!"}).redirect('/');
         } catch (err) {
             console.log(err);
             res.status(500).json(err);
