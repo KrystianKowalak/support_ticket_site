@@ -72,3 +72,7 @@ https://github.com/MJ-AZN/My-Portfolio
 Marcos Wang
 
 https://github.com/Marcos-Wang/Module-02-Challenge-Portfolio-Marcos-Wang
+
+Brian Tae Lee
+
+https://github.com/briantaelee/Portfolio
